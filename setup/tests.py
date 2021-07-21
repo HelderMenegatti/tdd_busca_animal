@@ -7,10 +7,16 @@ class AnimaisTestesCase(LiveServerTestCase):
     def setUp(self):
 
         a = os.path.dirname(__file__)
-        self.driver = webdriver.Chrome(executable_path=f'{a}/chromedriver')
+        self.browser = webdriver.Chrome(executable_path=f'{a}/chromedriver')
 
     def tearDown(self):
-        self.driver.quit()
+        self.browser.quit()
 
-    def test_abre_janela_do_chrome(self):
-        self.driver.get(self.live_server_url)
+
+    def teste_buscando_um_novo_animal(self):
+        # Ele encontra o busca animal de descide usar o site
+        home_page = self.browser.get(self.live_server_url + '/')
+        brand_element = self.browser.find_element_by_css_selector('.navbar')
+        self.assertEqual('Busca Animal', brand_element.text)
+
+
