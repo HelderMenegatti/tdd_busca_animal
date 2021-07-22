@@ -13,7 +13,8 @@ class AnimaisURLSTestCase(TestCase):
     def test_rotas_url_ultiliza_veiw_index(self):
         """Teste se a home da aplocação ultiliza a função index"""
         request = self.factory.get('/')
-        response = index(request)
-        self.assertEqual(response.status_code, 200)
+        with self.assertTemplateUsed('index.html'):
+            response = index(request)
+            self.assertEqual(response.status_code, 200)
 
     
